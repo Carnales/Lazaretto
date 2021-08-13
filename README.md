@@ -1,5 +1,5 @@
 # <p align="center">**Lazaretto**</p>
-<p align="center">*Confine the toxicity*</p>
+## <p align="center">*Confine the toxicity*</p>
 
 ## What inspired us?
 
