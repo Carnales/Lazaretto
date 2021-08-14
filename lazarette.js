@@ -63,13 +63,13 @@ async function commentAnalysis() {
     // document.getElementsByTagName('body')[0].style.overflow = 'hidden';
 
     // has to await since ML might take time to get results
-    var lvl = await getToxicityLevel(text);
+    var isToxic = await getToxicityLevel(text);
     var message = "";
 
     // assign a warning message
     var rev_btn = document.getElementById("reviewButton");
     var sub_btn = document.getElementById("submit-button");
-    if (lvl < 50) {
+    if (isToxic) {
       message = "Comment looks good! Go ahead and post it.";
       rev_btn.style.display = "none";
       sub_btn.style.display = "block";

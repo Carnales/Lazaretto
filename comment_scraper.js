@@ -1,6 +1,6 @@
 var KEY = "AIzaSyDR3_sdjrt-MNmfNKTXxHZefSAHI1sIF2I";
 var ID = window.location.href.split("?v=")[1];
-var url = "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=50&moderationStatus=published&order=relevance&textFormat=plainText&videoId=" + ID + "&key=" + KEY;
+var url = "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=13&moderationStatus=published&order=relevance&textFormat=plainText&videoId=" + ID + "&key=" + KEY;
 
 function getComments() {
   return $.getJSON(url).then(function(data) {
@@ -21,10 +21,13 @@ getComments().then(async function(results) {
     var total = 0;
     for (var i = 0; i < results.length; i++) {
       console.log("[+] progressing at " + Math.round((i+1)*100/results.length) + "%");
-      total += await getToxicityLevel(results[i]);
+      var isToxic = await getToxicityLevel(results[i]);
+      console.log("[?] returning --> " + isToxic);
+      if (isToxic)
+        total++;
     }
 
-    lvl = total / results.length;
+    lvl = total*100 / results.length;
 
     console.log("Avg toxicity level is " + Math.round(lvl) + "%");
 
