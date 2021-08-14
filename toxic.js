@@ -3,7 +3,7 @@ async function getToxicityLevel(text) {
   //await new Promise(r => setTimeout(r, 100));
   // return percentage of toxicity out of 100
   // The minimum prediction confidence.
-  const threshold = 0.9;
+  const threshold = 0.9; //ignore this measurement
 
   //tf.tensor([1, 2, 3, 4]).print();
   //const model = await tf.loadLayersModel($.get(chrome.runtime.getURL('/toxicity_1_default_1.tar.gz')));
@@ -24,7 +24,7 @@ async function getToxicityLevel(text) {
       let isToxic = false;
       console.log(predictions);
       predictions.forEach(label => {
-        if(label.results[0].match) {
+        if(label.results[0].probabilities[1] > 0.25) {
           console.log("SHOULD BE RETURNING TRUE");
           isToxic = true;
           

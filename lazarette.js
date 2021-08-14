@@ -69,7 +69,7 @@ async function commentAnalysis() {
     // assign a warning message
     var rev_btn = document.getElementById("reviewButton");
     var sub_btn = document.getElementById("submit-button");
-    if (isToxic) {
+    if (!isToxic) {
       message = "Comment looks good! Go ahead and post it.";
       rev_btn.style.display = "none";
       sub_btn.style.display = "block";
