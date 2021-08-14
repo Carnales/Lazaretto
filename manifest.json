@@ -24,14 +24,17 @@
     },
     "web_accessible_resources": [
     {
-        "resources": [ "modal.html" ],
+        "resources": [ "modal.html", "toxicity_1_default_1.tar.gz" ],
         "matches": [ "https://www.youtube.com/*" ]
       }
     ],
     "content_scripts": [
         {
           "matches": ["https://www.youtube.com/*"],
-          "js": ["jquery-3.6.0.min.js", "toxic.js", "lazarette.js", "modal.js", "comment_scraper.js"]
+          "js": ["jquery-3.6.0.min.js", "toxic.js", "lazarette.js", "modal.js", "comment_scraper.js", "tfjs.js", "toxicity.js"]
         }
-      ]
+      ],
+    "content_security_policy": {
+        "extension_pages": "tfjs.js 'self'; default-src 'self'"
+    }
 }
