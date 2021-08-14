@@ -26,46 +26,54 @@ async function replaceSubmit() {
     replaceButton = document.getElementById("replaceButton");
     replaceButton.addEventListener("click", function(event) {
         commentAnalysis();
+        replaceButton.innerHTML = "AI is Processing...";
         event.preventDefault();
     });
 }
 
-function commentAnalysis() {
-    var commentText = document.getElementById("input-container");
-    alert(commentText.textContent);
+async function commentAnalysis() {
+    var comment = document.getElementById("input-container");
 
-    //Locks the Scroll Wheel
-    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+    // retreive comment text and trim it of all surrounding whitespace
+    var text = comment.textContent.trim();
+
+    // Locks the Scroll Wheel
+    // document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+
+    // has to await since ML might take time to get results
+    var lvl = await getToxicityLevel(text);
+    var message = "";
+
+    // assign a warning message
+    if (lvl < 50)
+      message = "Comment looks good! Go ahead and post it.";
+    else
+      message = "Woah! This comment might be offensive, so be sure to edit it before you post.";
 
 
-    wrapperDiv = document.createElement("div");
-    wrapperDiv.setAttribute("style","position: absolute; left: 0px; top: 0px; background-color: rgb(255, 255, 255); opacity: 0.5; z-index: 2000; height: 100%; width: 100%;");
+    // inject the warning modal
+    $.get(chrome.runtime.getURL('/modal.html'), function(data) {
+      $($.parseHTML(data)).appendTo('body');
 
-    iframeElement = document.createElement("iframe");
-    iframeElement.setAttribute("style","width: 100%; height: 100%;");
+      // replace the warning message
+      document.getElementById("warning-message").innerHTML = message;
 
-    wrapperDiv.appendChild(iframeElement);
+      // move the OG comment button here
+       $("#place-for-button").append($("#submit-button"));
 
-    modalDialogParentDiv = document.createElement("div");
-    modalDialogParentDiv.setAttribute("style","position: absolute; width: 350px; border: 1px solid rgb(51, 102, 153); padding: 10px; background-color: rgb(255, 255, 255); z-index: 2001; overflow: auto; text-align: center; top: 149px; left: 497px;");
+       // listen to go back
+       var modal = document.getElementById("myModal");
 
-    modalDialogSiblingDiv = document.createElement("div");
+       document.getElementById("reviewButton").addEventListener("click", goBack);
 
-    modalDialogTextDiv = document.createElement("div");
-    modalDialogTextDiv.setAttribute("style" , "text-align:center");
+    });
+}
+function goBack() {
+    var modal = document.getElementById("myModal");
+    modal.remove();
 
-    modalDialogTextSpan = document.createElement("span");
-    modalDialogText = document.createElement("strong");
-    modalDialogText.innerHTML = "Processing...  Please Wait.";
-
-    modalDialogTextSpan.appendChild(modalDialogText);
-    modalDialogTextDiv.appendChild(modalDialogTextSpan);
-
-    modalDialogSiblingDiv.appendChild(modalDialogTextDiv);
-    modalDialogParentDiv.appendChild(modalDialogSiblingDiv);
-
-    document.getElementById("body").appendChild(wrapperDiv);
-    document.getElementById("body").appendChild(modalDialogParentDiv);
+    replaceButton = document.getElementById("replaceButton");
+    replaceButton.innerHTML = "Be nicer this time!";
 }
 
 //waits for comment box
@@ -89,4 +97,4 @@ function waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeout
 }
 
 //:(
-console.log("Farts68");
+console.log("Farts7000");
