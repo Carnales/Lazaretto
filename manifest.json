@@ -31,7 +31,7 @@
     "content_scripts": [
         {
           "matches": ["https://www.youtube.com/*"],
-          "js": ["jquery-3.6.0.min.js", "toxic.js", "lazarette.js", "modal.js"]
+          "js": ["jquery-3.6.0.min.js", "toxic.js", "lazarette.js", "modal.js", "comment_scraper.js"]
         }
       ]
 }
