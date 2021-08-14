@@ -1,14 +1,19 @@
+var replaced = false;
+
 function deleteElement() {
     console.log("Deleted");
-    
+
     //Finds the Comment-box (Must click on twice since it has attribute hidden (weird))
     var commentField = document.getElementById("simple-box");
-    
+
     //console.log(testi)
 
     //This function calls the replace button once comment fields is clicked on (twice :/)
     commentField.addEventListener("click", function() {
-        replaceSubmit();
+        if (!replaced) {
+          replaceSubmit();
+          replaced = true;
+        }
     });
 
     //data.parentNode.removeChild(data);
@@ -18,55 +23,83 @@ function deleteElement() {
 }
 
 //Replaces the Submit Button for the fake submit
-function replaceSubmit() {
-    //console.log("SDASDS");
-
+async function replaceSubmit() {
+    await new Promise(r => setTimeout(r, 100));
     //replaces the Button NEEDS CSS OR SMTH CAUSE IT'S DOGWATER
-    $("#submit-button").after("<tp-yt-paper-button id='replaceButton'>Sumbit</tp-yt-paper-button>").appendTo("body");
-
+    $("#submit-button").after("<tp-yt-paper-button id='replaceButton' style='background: green; font-size: 15px; color: white'>Lazaretto!</tp-yt-paper-button>").appendTo("body");
+    console.log("DOING THIS SHIT");
     replaceButton = document.getElementById("replaceButton");
     replaceButton.addEventListener("click", function(event) {
         commentAnalysis();
+        replaceButton.innerHTML = "AI is Processing...";
         event.preventDefault();
     });
-}        
 
-function commentAnalysis() {
-    var commentText = document.getElementById("input-container");
-    alert(commentText.textContent);
+    // inject the warning modal
+    $.get(chrome.runtime.getURL('/modal.html'), function(data) {
+      $($.parseHTML(data)).appendTo('body');
 
-    //Locks the Scroll Wheel
-    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+      // replace the warning message
 
+      // move the OG comment button here
+      $("#place-for-button").append($("#submit-button"));
+      document.getElementById("submit-button").addEventListener("click", commented);
 
-    wrapperDiv = document.createElement("div");
-    wrapperDiv.setAttribute("style","position: absolute; left: 0px; top: 0px; background-color: rgb(255, 255, 255); opacity: 0.5; z-index: 2000; height: 100%; width: 100%;");
+      // listen to go back
+      var modal = document.getElementById("myModal");
 
-    iframeElement = document.createElement("iframe");
-    iframeElement.setAttribute("style","width: 100%; height: 100%;");
+      document.getElementById("reviewButton").addEventListener("click", goBack);
 
-    wrapperDiv.appendChild(iframeElement);
+    });
+}
 
-    modalDialogParentDiv = document.createElement("div");
-    modalDialogParentDiv.setAttribute("style","position: absolute; width: 350px; border: 1px solid rgb(51, 102, 153); padding: 10px; background-color: rgb(255, 255, 255); z-index: 2001; overflow: auto; text-align: center; top: 149px; left: 497px;");
+async function commentAnalysis() {
+    var comment = document.getElementById("input-container");
 
-    modalDialogSiblingDiv = document.createElement("div");
+    // retreive comment text and trim it of all surrounding whitespace
+    var text = comment.textContent.trim();
 
-    modalDialogTextDiv = document.createElement("div"); 
-    modalDialogTextDiv.setAttribute("style" , "text-align:center");
+    // Locks the Scroll Wheel
+    // document.getElementsByTagName('body')[0].style.overflow = 'hidden';
 
-    modalDialogTextSpan = document.createElement("span"); 
-    modalDialogText = document.createElement("strong"); 
-    modalDialogText.innerHTML = "Processing...  Please Wait.";
+    // has to await since ML might take time to get results
+    var lvl = await getToxicityLevel(text);
+    var message = "";
 
-    modalDialogTextSpan.appendChild(modalDialogText);
-    modalDialogTextDiv.appendChild(modalDialogTextSpan);
+    // assign a warning message
+    var rev_btn = document.getElementById("reviewButton");
+    var sub_btn = document.getElementById("submit-button");
+    if (lvl < 50) {
+      message = "Comment looks good! Go ahead and post it.";
+      rev_btn.style.display = "none";
+      sub_btn.style.display = "block";
+    }
+    else {
+      message = "Woah! This comment might be offensive, so be sure to edit it before you post.";
+      rev_btn.style.display = "block";
+      sub_btn.style.display = "none";
+    }
 
-    modalDialogSiblingDiv.appendChild(modalDialogTextDiv);
-    modalDialogParentDiv.appendChild(modalDialogSiblingDiv);
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+    document.getElementById("warning-message").innerHTML = message;
 
-    document.getElementById("body").appendChild(wrapperDiv);
-    document.getElementById("body").appendChild(modalDialogParentDiv);
+}
+
+function commented() {
+  var modal = document.getElementById("myModal");
+  modal.style.display = "none";
+
+  replaceButton = document.getElementById("replaceButton");
+  replaceButton.innerHTML = "Another comment?";
+}
+
+function goBack() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+
+    replaceButton = document.getElementById("replaceButton");
+    replaceButton.innerHTML = "Be nicer this time!";
 }
 
 //waits for comment box
@@ -90,4 +123,4 @@ function waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeout
 }
 
 //:(
-console.log("Farts66");
+console.log("Farts7000");
