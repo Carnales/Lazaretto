@@ -1,9 +1,9 @@
 function deleteElement() {
     console.log("Deleted");
-    
+
     //Finds the Comment-box (Must click on twice since it has attribute hidden (weird))
     var commentField = document.getElementById("simple-box");
-    
+
     //console.log(testi)
 
     //This function calls the replace button once comment fields is clicked on (twice :/)
@@ -18,18 +18,17 @@ function deleteElement() {
 }
 
 //Replaces the Submit Button for the fake submit
-function replaceSubmit() {
-    //console.log("SDASDS");
-
+async function replaceSubmit() {
+    await new Promise(r => setTimeout(r, 100));
     //replaces the Button NEEDS CSS OR SMTH CAUSE IT'S DOGWATER
-    $("#submit-button").after("<tp-yt-paper-button id='replaceButton'>Sumbit</tp-yt-paper-button>").appendTo("body");
+    $("#submit-button").after("<tp-yt-paper-button id='replaceButton' style='background: green; font-size: 15px; color: white'>Lazaretto!</tp-yt-paper-button>").appendTo("body");
 
     replaceButton = document.getElementById("replaceButton");
     replaceButton.addEventListener("click", function(event) {
         commentAnalysis();
         event.preventDefault();
     });
-}        
+}
 
 function commentAnalysis() {
     var commentText = document.getElementById("input-container");
@@ -52,11 +51,11 @@ function commentAnalysis() {
 
     modalDialogSiblingDiv = document.createElement("div");
 
-    modalDialogTextDiv = document.createElement("div"); 
+    modalDialogTextDiv = document.createElement("div");
     modalDialogTextDiv.setAttribute("style" , "text-align:center");
 
-    modalDialogTextSpan = document.createElement("span"); 
-    modalDialogText = document.createElement("strong"); 
+    modalDialogTextSpan = document.createElement("span");
+    modalDialogText = document.createElement("strong");
     modalDialogText.innerHTML = "Processing...  Please Wait.";
 
     modalDialogTextSpan.appendChild(modalDialogText);
@@ -90,4 +89,4 @@ function waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeout
 }
 
 //:(
-console.log("Farts66");
+console.log("Farts68");
