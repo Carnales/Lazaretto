@@ -2,12 +2,12 @@
     "name": "Lazaretto",
     "description": "Confine the Toxicity!",
     "version": "1.0",
-    "manifest_version": 3,
+    "manifest_version": 2,
     "background": {
-        "service_worker": "background.js"
+        "scripts": ["background.js"]
     },
-    "permissions": ["storage", "activeTab", "scripting", "tabs"],
-    "action": {
+    "permissions": ["storage", "activeTab", "tabs"],
+    "browser_action": {
         "default_popup": "popup.html",
         "default_icon": {
             "16": "/images/get_started16.png",
@@ -22,19 +22,12 @@
         "48": "/images/get_started48.png",
         "128": "/images/get_started128.png"
     },
-    "web_accessible_resources": [
-    {
-        "resources": [ "modal.html", "toxicity_1_default_1.tar.gz" ],
-        "matches": [ "https://www.youtube.com/*" ]
-      }
-    ],
+    "web_accessible_resources": [ "modal.html", "toxicity_1_default_1.tar.gz" ],
     "content_scripts": [
         {
           "matches": ["https://www.youtube.com/*"],
           "js": ["jquery-3.6.0.min.js", "toxic.js", "lazarette.js", "modal.js", "comment_scraper.js", "tfjs.js", "toxicity.js"]
         }
       ],
-    "content_security_policy": {
-        "extension_pages": "tfjs.js 'self'; default-src 'self'"
-    }
+    "content_security_policy": "tfjs.js 'self'; default-src 'self'"
 }
