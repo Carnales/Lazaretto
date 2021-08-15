@@ -2,11 +2,12 @@
 ## <p align="center">*Confine the toxicity*</p>
 
 ## Guide
-
-<p align="center">![Lazaretto Demo Video](https://www.youtube.com/watch?v=ey_374G-SYg)</p>
-
-<p align="center">![Lazaretto at work](images\P1.png?raw=true "Lazaretto at Work")</p>
-
+<div style="text-align:center">
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/wwTFL5zMVSs/0.jpg)](https://www.youtube.com/watch?v=ey_374G-SYg)
+</div>
+<div style="text-align:center">
+    <img src="images\P1.png" />
+</div>
 
 ## What inspired us?
 
