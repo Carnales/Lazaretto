@@ -1,6 +1,13 @@
 # <p align="center">**Lazaretto**</p>
 ## <p align="center">*Confine the toxicity*</p>
 
+## Guide
+
+<p align="center">![Lazaretto Demo Video](https://www.youtube.com/watch?v=ey_374G-SYg)</p>
+
+<p align="center">![Lazaretto at work](images\P1.png?raw=true "Lazaretto at Work")</p>
+
+
 ## What inspired us?
 
 The beauty of the internet is followed by a shadow of twisted anarchy manifested through abuse and harassment.
