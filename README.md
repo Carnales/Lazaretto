@@ -2,9 +2,9 @@
 ## <p align="center">*Confine the toxicity*</p>
 
 ## Guide
-<div style="text-align:center">
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/wwTFL5zMVSs/0.jpg)](https://www.youtube.com/watch?v=ey_374G-SYg)
-</div>
+
+[![IMAGE ALT TEXT HERE](https://www.youtube.com/watch?v=ey_374G-SYg)]
+
 <div style="text-align:center">
     <img src="images\P1.png" />
 </div>
