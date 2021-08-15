@@ -1,6 +1,6 @@
 var KEY = "AIzaSyDR3_sdjrt-MNmfNKTXxHZefSAHI1sIF2I";
 var ID = window.location.href.split("?v=")[1];
-var url = "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=50&moderationStatus=published&order=relevance&textFormat=plainText&videoId=" + ID + "&key=" + KEY;
+var url = "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=50&moderationStatus=published&textFormat=plainText&videoId=" + ID + "&key=" + KEY;
 
 function getComments() {
   return $.getJSON(url).then(function(data) {

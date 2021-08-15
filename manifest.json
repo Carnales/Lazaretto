@@ -29,5 +29,5 @@
           "js": ["jquery-3.6.0.min.js", "toxic.js", "lazarette.js", "modal.js", "comment_scraper.js", "tfjs.js", "toxicity.js"]
         }
       ],
-    "content_security_policy": "script-src 'self' tfjs.js ; default-src 'self'"
+    "content_security_policy": "script-src 'self' 'unsafe-eval' ; default-src 'self' 'unsafe-eval'"
 }
