@@ -1,12 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  <head version="1c1e62d32e1b6da4ced32b7d0e7ff9180abc21fb">
     <link rel="stylesheet" href="button.css">
     <link rel="stylesheet" href="circle.css">
+    <link rel="stylesheet" href="dcp-modal.css">
     <script type="text/javascript" src="popup.js"></script>
+    
+    <script>
+      ;(function bundleReadyIIFE() {
+        let bundleScript = document.getElementById("_dcp_client_bundle");
+        let ready = bundleScript.getAttribute('onready');
+        window.dcp = bundleScript.exports;
+      
+        /**
+         * Transform instances of Address-like values into Addresses. Necessary since
+         * the config can't access the Address class before the bundle is loaded.
+         */
+        window.dcp.wallet.Address.patchUp(dcpConfig);
+        if (ready)
+          window.setTimeout(function bundleReadyFire() { let indirectEval=eval; indirectEval(ready) }, 0);
+      })();
+      
+      /**
+       * The script tag is broken up on purpose, to avoid parsing errors by certain
+       * browsers.
+       */
+      </script>
   </head>
   <body>
-    <table style="width:100%">
+    <table>
       <tr>
         <th><h2>Percent Toxicty</h2></th>
       </tr>
@@ -21,14 +43,59 @@
           </div>
         </td>
         <td></td>
-        <td>It is highly recommended to avoid this comment section. Please do not communicate with harrassers and cyberbullys</td>
+        <td>It is highly recommended to avoid this comment section. Please do not communicate with harrassers and cyberbullies</td>
       </tr>
     </table>
 
+    <script src="dcp-client.js"></script>
+    <!-- <script>
+          
+      let inputSet = '';
+      let output = '';
+      let resultSet = [];
+      
+      inputString = "somewhere beyond the sea"
 
+      inputSet = Array.from(inputString);
+      output = '';
+      console.log("Input generated");
 
+      async function workFn(letter) {
+        progress();
+        return letter.toUpperCase();
+      }
 
+      join_key = 'rrc-edge';
+      join_secret = 'oQGMzq2qqr';
 
+      async function deploy(input) {
+        let job = dcp.for(input, workFn);
+        job.public.name = 'DCP - toUpperCompute';
+      
+        if (join_key) job.computeGroups = [{joinKey: join_key, joinSecret: join_secret}];
+        
+      
+        job.on('accepted', () => {
+          console.log(` - Job accepted by scheduler, waiting for results`);
+          console.log(` - Job has id ${job.id}`);
+        });
+      
+        job.on('result', (ev) => {
+          //console.log(ev.result);   
+        });
+      
+        let results = await job.exec();
+        console.log("Compute complete");
+        resultSet = Array.from(results);
+      }
+      
+      r = deploy(inputSet).then((value) => {
+            console.log(resultSet);
+          });
+
+      output = resultSet.join('');
+      console.log(output);
+    </script> -->
 
     <script src="popup.js"></script>
     <script src="toxic.js"></script>

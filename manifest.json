@@ -26,8 +26,8 @@
     "content_scripts": [
         {
           "matches": ["https://www.youtube.com/*"],
-          "js": ["jquery-3.6.0.min.js", "toxic.js", "lazarette.js", "modal.js", "comment_scraper.js", "tfjs.js", "toxicity.js"]
+          "js": ["jquery-3.6.0.min.js", "toxic.js", "lazarette.js", "modal.js", "comment_scraper.js", "tfjs.js", "toxicity.js", "dcp-client.js", "dcp-client-bundle.js", "dcp-config.js"]
         }
       ],
-    "content_security_policy": "script-src 'self' tfjs.js ; default-src 'self'"
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; default-src 'self' 'unsafe-eval'"
 }

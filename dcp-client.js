@@ -40,7 +40,7 @@ https://distributed.computer/`, "font-weight: bold; font-size: 1.2em; color: #00
   } else {
     let allScripts = document.getElementsByTagName('SCRIPT');
     let thisScript = allScripts[allScripts.length - 1];
-    let thisScriptURL = new URL(thisScript.src)
+    //let thisScriptURL = new URL(thisScript.src)
     let schedulerURL;
     let dcpConfigHref = thisScript.getAttribute('dcpConfig');
 
@@ -51,16 +51,17 @@ https://distributed.computer/`, "font-weight: bold; font-size: 1.2em; color: #00
 
     if (!dcpConfigHref) {
       if (schedulerURL)
-        dcpConfigHref = schedulerURL.origin + schedulerURL.pathname + 'etc/dcp-config.js' + (schedulerURL.search || thisScriptURL.search);
+        dcpConfigHref = schedulerURL.origin + schedulerURL.pathname + 'etc/dcp-config.js' + (schedulerURL.search || '');
       else
-        dcpConfigHref = thisScriptURL.origin + thisScriptURL.pathname.replace(/\/dcp-client\/dcp-client.js$/, '/etc/dcp-config.js') + thisScriptURL.search;
+        dcpConfigHref = 'dcp-config.js';
     }
 
     /** Load dcp-config.js from scheduler, and merge with running dcpConfig */
+
     function loadConfig() {
       var configScript = document.createElement('SCRIPT');
       configScript.setAttribute('type', 'text/javascript');
-      configScript.setAttribute('src', dcpConfigHref);
+      configScript.setAttribute('src', 'dcp-client.js');
       configScript.setAttribute('id', '_dcp_config');
       if (_dcpConfig || schedulerURL) { /* Preserve local configuration as overrides */
         let html = '';
@@ -90,7 +91,7 @@ https://distributed.computer/`, "font-weight: bold; font-size: 1.2em; color: #00
      */
     function loadBundle() {
       var bundleScript = document.createElement('SCRIPT');
-      var bundleSrc = thisScript.getAttribute("bundle") || (thisScript.src.replace('/dcp-client.js', '/dist/dcp-client-bundle.js'));
+      var bundleSrc = 'dcp-client-bundle.js';
       var tmp;
       
       bundleScript.setAttribute('type', 'text/javascript');
