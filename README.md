@@ -3,9 +3,9 @@
 
 ## Guide
 
-<p align="center">![Lazaretto Demo Video](https://www.youtube.com/watch?v=ey_374G-SYg)</p>
+![Lazaretto Demo Video](https://www.youtube.com/watch?v=ey_374G-SYg)
 
-<p align="center">![Lazaretto at work](images\P1.png?raw=true "Lazaretto at Work")</p>
+![Lazaretto at work](images\P1.png?raw=true "Lazaretto at Work")
 
 
 ## What inspired us?
